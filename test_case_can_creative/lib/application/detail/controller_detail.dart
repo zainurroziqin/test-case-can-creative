@@ -16,6 +16,10 @@ class ControllerDetail extends GetxController {
   final _data = const GamesEntity().obs;
   GamesEntity get data => _data.value;
 
+  final _isFavorite = false.obs;
+  bool get isFavorite => _isFavorite.value;
+  setFavorite(bool e) => _isFavorite.value = e;
+
   getDetailGames(int id) async {
     _loading.value = true;
     final result = await gamesUsecase.getDetailGames(id);
@@ -24,6 +28,20 @@ class ControllerDetail extends GetxController {
     }, (data) {
       _data.value = data;
     });
+    _loading.value = false;
+  }
+
+  addFavorite() async {
+    _loading.value = true;
+    await gamesUsecase.addGamesFavorite(data);
+    setFavorite(true);
+    _loading.value = false;
+  }
+
+  deleteFavorite() async {
+    _loading.value = true;
+    await gamesUsecase.deleteGamesFavorite(data);
+    setFavorite(false);
     _loading.value = false;
   }
 }

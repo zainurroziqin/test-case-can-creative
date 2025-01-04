@@ -7,7 +7,7 @@ import 'package:test_case_can_creative/domain/failures/failures.dart';
 import 'package:test_case_can_creative/domain/repo/games_repo.dart';
 
 class GamesRepoImpl implements GamesRepo {
-  SourceGame sourceGame;
+  final SourceGame sourceGame;
   AppDatabase appDatabase;
   GamesRepoImpl({
     required this.sourceGame,

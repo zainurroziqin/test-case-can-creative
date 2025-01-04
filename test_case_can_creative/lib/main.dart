@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:test_case_can_creative/data/config/theme.dart';
 import 'package:test_case_can_creative/application/menu_page.dart';
+import 'package:test_case_can_creative/data/source/local/app_database.dart';
 import 'injection.dart' as di;
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  di.init();
+  final database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  di.init(database);
   runApp(const MyApp());
 }
 

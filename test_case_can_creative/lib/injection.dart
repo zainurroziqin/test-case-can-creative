@@ -8,7 +8,19 @@ import 'package:http/http.dart' as http;
 
 final sl = GetIt.I;
 
-Future<void> init() async {
+Future<void> init(AppDatabase database) async {
+  // external
+  sl.registerFactory(
+    () => http.Client(),
+  );
+
+  
+
+  sl.registerSingleton<AppDatabase>(database);
+  // final database =
+  //     await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+
+  // sl.registerSingleton<AppDatabase>(database);
 // data layer
   sl.registerFactory<SourceGame>(
     () => SourceGameImpl(client: sl()),
@@ -24,11 +36,4 @@ Future<void> init() async {
   // sl.registerFactory(
   //   () => ControllerHome(gamesUsecase: sl()),
   // );
-// external
-  sl.registerFactory(
-    () => http.Client(),
-  );
-  final database =
-      await $FloorAppDatabase.databaseBuilder('app_database.db').build();
-  sl.registerSingleton(database);
 }
